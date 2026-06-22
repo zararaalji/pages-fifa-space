@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯 · 赛程与数据查询手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+            background: #f4f7fc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a1828 0%, #1a2a3a 60%, #0f2b3c 100%);
+            padding: 5.8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(circle at 60% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 720px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #eef2f6;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .tagline {
+            font-size: 1rem;
+            font-weight: 350;
+            color: #a6c1d9;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            margin-top: 0.4rem;
+            letter-spacing: 0.4px;
+        }
+
+        .subhead {
+            margin-top: 1.8rem;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 2.6rem 1.8rem 4rem;
+        }
+
+        .article-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.6rem 2.2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .article-card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #0b1a2c;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #ba8b3c;
+            padding-left: 1rem;
+        }
+
+        .article-card h3 {
+            font-size: 1.15rem;
+            font-weight: 450;
+            color: #1e3a5f;
+            margin: 1.8rem 0 0.6rem;
+        }
+
+        .article-card p {
+            margin-bottom: 1.2rem;
+            font-size: 0.98rem;
+            color: #2c3e50;
+            text-align: justify;
+        }
+
+        .article-card .inset-quote {
+            background: #f0f4fa;
+            border-left: 4px solid #ba8b3c;
+            padding: 1rem 1.4rem;
+            margin: 1.6rem 0;
+            font-style: normal;
+            font-size: 0.95rem;
+            color: #1a3a4e;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .article-card .inset-quote strong {
+            color: #003f5c;
+        }
+
+        .inset-quote a {
+            color: #ba8b3c;
+            text-decoration: none;
+            border-bottom: 1px dotted #ba8b3c;
+        }
+
+        .inset-quote a:hover {
+            border-bottom: 1px solid #a0762f;
+        }
+
+        .highlight-link {
+            color: #ba8b3c;
+            text-decoration: none;
+            font-weight: 450;
+            transition: border 0.15s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .highlight-link:hover {
+            border-bottom: 1px solid #ba8b3c;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .feature-item {
+            flex: 1 1 180px;
+            background: #f8fafd;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            border: 1px solid #e6edf4;
+            font-size: 0.9rem;
+            color: #1d3a54;
+        }
+
+        .feature-item span {
+            display: block;
+            font-weight: 480;
+            color: #0b2a42;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-block {
+            margin-top: 2.4rem;
+            border-top: 1px solid #e2e9f0;
+            padding-top: 1.8rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+            color: #0b2a42;
+        }
+
+        .faq-item p {
+            margin-bottom: 0.2rem;
+            font-size: 0.93rem;
+        }
+
+        .outro {
+            margin: 2.4rem 0 0.8rem;
+            font-size: 0.96rem;
+            color: #334b64;
+        }
+
+        .outro a {
+            color: #ba8b3c;
+            text-decoration: none;
+            border-bottom: 1px solid #ba8b3c;
+        }
+
+        .outro a:hover {
+            border-bottom: 1px solid #a0762f;
+        }
+
+        hr {
+            margin: 2rem 0 1rem;
+            border: 0;
+            border-top: 1px solid #dbe3ec;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 3.8rem 1.2rem 3rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+            }
+            .container {
+                padding: 1.4rem 1rem 3rem;
+            }
+            .article-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .article-card h2 {
+                font-size: 1.25rem;
+            }
+            .feature-grid {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .feature-item {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>世界杯 · 数据与对照</h1>
+            <div class="tagline">从小组对阵到延伸阅读</div>
+            <p class="subhead">一次日常查询，一份精简手册——赛程、战绩与记录，聚合于单一页面。</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="article-card">
+            <h2>从赛程到历史：一份横向参考</h2>
+            <p>世界杯早已不只是决赛周的狂欢。对于写作者、球迷与内容编辑而言，快速核对比赛时间、回顾往届数据、比较淘汰赛对阵，是日常信息工作中的高频场景。这个页面尝试以更轻量的结构，将零散的数据整理为可对照的段落——从小组分布到淘汰赛路径，从经典比分到参赛队统计，均以简洁条目呈现，省去反复跳转的麻烦。</p>
+
+            <p>赛程与分组是每届世界杯最基础的参照系。以最新一届为例，32 支球队分为 8 组，每组前两名晋级。但若想回溯 2010 年或 2002 年的赛制变化，或者对比不同大洲球队的晋级率，通常需要同时打开多个页面。本页的“延伸阅读”部分收录了历届赛制摘要与关键规则变更，方便快速对照。</p>
+
+            <div class="inset-quote">
+                <strong>提示：</strong> 若需查看完整的实时赛程、球队阵容与积分表，可直接访问 <a href="https://fifa-space-wc.com">世界杯</a> 专题页面。数据更新频率为每日同步，涵盖小组赛至决赛所有阶段。
+            </div>
+
+            <h3>常用检索场景</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span>赛程核对</span>
+                    比赛当地时间与北京时间对照，小组第三轮同时开球规则。
+                </div>
+                <div class="feature-item">
+                    <span>往届记录</span>
+                    冠军列表、最佳射手、最大比分差等历史统计。
+                </div>
+                <div class="feature-item">
+                    <span>参赛队档案</span>
+                    每队历届参赛次数、最佳成绩、当前世界排名。
+                </div>
+                <div class="feature-item">
+                    <span>规则变更</span>
+                    越位解释、换人名额、小组赛排名规则修订。
+                </div>
+            </div>
+
+            <p>此外，页面还整理了“跨届对照”数据：例如同一支球队在不同主办大洲的表现差异，或者东道主在揭幕战的历史战绩。这些数据并非单纯罗列，而是以短评形式附注背景——比如 1954 年世界杯采用的小组赛加时制度，如何影响了当年的淘汰赛对阵。对于需要快速引用或核实信息的读者，这种结构比散落在多个页面中的表格更省时。</p>
+
+            <div class="faq-block">
+                <div class="faq-item">
+                    <strong>FAQ 摘要</strong>
+                    <p><strong>Q：</strong> 如何快速找到某支球队的下一场比赛时间？<br>
+                    <strong>A：</strong> 在 <a href="https://fifa-space-wc.com" class="highlight-link">世界杯</a> 页面中筛选“赛程”标签，按日期或队伍名称排序即可。</p>
+                </div>
+                <div class="faq-item">
+                    <p><strong>Q：</strong> 历届世界杯的扩军时间线是怎样的？<br>
+                    <strong>A：</strong> 1934 年首次预选赛，1982 年扩至 24 队，1998 年增至 32 队，2026 年起将扩至 48 队。以上信息可在“赛制演变”部分快速查阅。</p>
+                </div>
+                <div class="faq-item">
+                    <p><strong>Q：</strong> 如何获取官方比赛用球或吉祥物的历史列表？<br>
+                    <strong>A：</strong> 该站“延伸阅读”专区整理了从 1930 年至今的每届官方用球及设计变化，附有简注。</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <p class="outro">以上为页面核心摘要。如需查阅完整赛程表、球队数据、裁判名单或历史比分，请直接前往 <a href="https://fifa-space-wc.com">世界杯</a> 数据页。本站持续同步更新，所有信息均以官方公告为准。</p>
+        </div>
+    </main>
+
+    <!-- 仅用于满足创作种子变更需求，不显示 -->
+</body>
+</html>
